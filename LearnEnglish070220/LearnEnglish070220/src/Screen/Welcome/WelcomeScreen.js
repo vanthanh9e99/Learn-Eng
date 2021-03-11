@@ -50,7 +50,7 @@ export function WelcomeScreen({navigation}) {
               },
             ]}>
             <Text style={[styles.letGo, {color: Assets.Colors.StatusBar}]}>
-              BẮT ĐẦU NGAY
+              ĐĂNG KÝ NGAY
             </Text>
           </TouchableOpacity>
         </View>

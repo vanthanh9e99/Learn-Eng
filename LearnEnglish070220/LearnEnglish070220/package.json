@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "cd android &&./gradlew clean && cd .. && npx react-native run-android ",
+    "ios": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
+    "android-release": "npx react-native run-android --variant=release",
+    "pod": "cd ios && pod install && cd ..",
+    "apk": "cd android &&./gradlew clean && ./gradlew assembleRelease && cd ..",
+    "aab": "cd android &&./gradlew clean && ./gradlew bundleRelease && cd ..",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -33,6 +37,7 @@
     "react-native-sound-player": "^0.10.5",
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.0",
+    "react-native-tts": "^3.3.0",
     "react-native-vector-icons": "^8.0.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
