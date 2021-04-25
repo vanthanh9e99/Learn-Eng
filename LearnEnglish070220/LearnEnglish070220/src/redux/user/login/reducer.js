@@ -5,11 +5,19 @@ const initialState = {
   id: -1,
   username: '',
   avatar: ``,
+  token: '',
   loadingLogin: false,
   error: false,
 };
 export default function loginReducer(state = initialState, action) {
   switch (action.type) {
+    case loginTypes.LOGIN_EMAIL:
+      return {
+        ...state,
+        loadingLogin: false,
+        error: false,
+        ...action.data,
+      };
     case loginTypes.SAVE_USER_INFO_ASYNC:
       return {
         ...state,

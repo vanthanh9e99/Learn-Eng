@@ -1,16 +1,100 @@
 import React, {useState, useRef} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View, Keyboard} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../../../redux/user/login/action';
+import {loginEmail} from '../../../redux/user/login/action';
 
 import {Assets} from '../../../Ultis/Constant';
+import {Loading1} from '../../../Components/Loading';
 
 export const LoginEmail = React.memo(({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showLoadingLogin, setShowLoadingLogin] = useState(false);
   const dispatch = useDispatch();
+  const _loginEmail = () => {
+    /////////////////
+    /////////////////
+    /////////////////
+    /////////////////
+    axios.post(
+      'url',
+      {
+        body: {
+          username: 'VanThanh',
+          password: '123456',
+        },
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${user.token}`,
+        },
+      },
+    )
+    axios({
+      method: 'post',
+      url: 'https://duolingo-v1.herokuapp.com/api/login',
+      data: {
+        username: 'VanThanh',
+        password: '123456',
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${user.token}`,
+      },
+    })
+      .then((res) => {
+        //res.data
+      })
+      .catch(() => {});
+    //////////////
+    //////////////
+    //////////////
+    //////////////
+    Keyboard.dismiss();
+    setShowLoadingLogin(true);
+    axios({
+      method: 'post',
+      url: 'https://duolingo-v1.herokuapp.com/api/login',
+      data: {
+        email: username,
+        passWord: password,
+      },
+    })
+      .then((res) => {
+        setShowLoadingLogin(false);
+        dispatch(
+          loginEmail({
+            username: username,
+            token: res.data.token,
+            id: '12314',
+            avatar:
+              'https://i.pinimg.com/originals/64/a8/13/64a81329eb236b62fc6ca92298e62280.jpg',
+          }),
+        );
+        AsyncStorage.setItem(
+          'loginReducer',
+          JSON.stringify({
+            username: username,
+            token: res.data.token,
+            id: '12314',
+            avatar:
+              'https://i.pinimg.com/originals/64/a8/13/64a81329eb236b62fc6ca92298e62280.jpg',
+          }),
+        );
+      })
+      .catch(() => {
+        setShowLoadingLogin(false);
+        Alert.alert(
+          'Đăng nhập thất bại',
+          'Tài khoản và mật khẩu không chính xác.',
+        );
+      });
+  };
   return (
     <View style={styles.main}>
       <TextInput
@@ -36,7 +120,8 @@ export const LoginEmail = React.memo(({navigation}) => {
                 ? Assets.Colors.Gray
                 : Assets.Colors.Green,
           },
-        ]}>
+        ]}
+        onPress={() => _loginEmail()}>
         <Text
           style={[
             styles.titleButtonLogin,
@@ -95,7 +180,13 @@ export const LoginEmail = React.memo(({navigation}) => {
           tôi.
         </Text>
       </View>
-      {/* {loadingLogin ? <Loading1 /> : null} */}
+
+      {showLoadingLogin ? (
+        <Loading1
+          backgroundColor={'rgba(255,255,255,.4)'}
+          title={'Đang đăng nhập'}
+        />
+      ) : null}
     </View>
   );
 });

@@ -1,34 +1,25 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-} from 'react-native';
+import {ActivityIndicator, StyleSheet, View, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Assets} from '../../Ultis/Constant';
-const {width, height} = Dimensions.get('screen');
-export function Loading1({backgroundColor, title}) {
+
+export function Loading1({backgroundColor}) {
+  alert(backgroundColor);
   return (
-    <View
-      style={[
-        styles.main,
-        {backgroundColor: !!backgroundColor ? backgroundColor : 'white'},
-      ]}>
+    <View style={styles.main}>
       <FastImage
         resizeMode={FastImage.resizeMode.contain}
         source={Assets.Images.DuolingoLoading.image}
         style={styles.img}
       />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>Đang tải</Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   main: {
-    width,
-    height,
+    width: '100%',
+    height: '100%',
     backgroundColor: 'white',
     position: 'absolute',
     justifyContent: 'center',

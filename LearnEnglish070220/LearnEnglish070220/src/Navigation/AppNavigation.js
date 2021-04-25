@@ -9,6 +9,7 @@ import {WelcomeScreen} from '../Screen/Welcome';
 import {ChooseInformationScreen} from '../Screen/ChooseInformationWelCome';
 import {TestSelectedScreen} from '../Screen/Test_Selected';
 import {LoginScreen} from '../Screen/Login';
+import {HomeScreen as HomeTeacherScreen} from '../Screen/Teacher/Home';
 
 import {saveFromAsync} from '../redux/user/login/action';
 
@@ -63,9 +64,11 @@ export default function AppNavigation({initialRouteName}) {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={initialRouteName}
+        // initialRouteName={"HomeTeacherScreen"}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="HomeScreen" component={HomeNavigation} />
         <Stack.Screen name="FirstScreens" component={FirstScreens} />
+        <Stack.Screen name="HomeTeacherScreen" component={HomeTeacherScreen} />        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -6,6 +6,12 @@ export function login(data) {
     data,
   };
 }
+export function loginEmail(data) {
+  return {
+    type: types.LOGIN_EMAIL,
+    data,
+  };
+}
 export function saveFromAsync(data) {
   return {
     type: types.SAVE_USER_INFO_ASYNC,

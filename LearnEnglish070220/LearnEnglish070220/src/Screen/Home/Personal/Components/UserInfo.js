@@ -42,11 +42,7 @@ export const Avatar = React.memo(({scrollY}) => {
     };
   });
   return (
-    <AnimatedView
-      style={[
-        styleAvatar.mainAvatar,
-        animationStyle,
-      ]}>
+    <AnimatedView style={[styleAvatar.mainAvatar, animationStyle]}>
       <TouchableOpacity>
         <LazyImage source={{uri: avatar}} style={styleAvatar.avatar} />
         <View style={styleAvatar.viewEdit}>
@@ -87,11 +83,12 @@ const styleAvatar = StyleSheet.create({
 });
 export const UserInfo = React.memo(() => {
   const id = useSelector((state) => state.loginReducer.id);
+  const username = useSelector((state) => state.loginReducer.username);
 
   return (
     <View style={[styles.main]}>
       <View style={styles.viewLeft}>
-        <Text style={styles.username}>Thanh Nguyen</Text>
+        <Text style={styles.username}>{username}</Text>
         <Text>{id}</Text>
       </View>
       <View style={[styles.viewRight]}></View>
@@ -122,7 +119,7 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     flexDirection: 'row',
-    paddingBottom:5
+    paddingBottom: 5,
   },
   username: {
     fontSize: 18,

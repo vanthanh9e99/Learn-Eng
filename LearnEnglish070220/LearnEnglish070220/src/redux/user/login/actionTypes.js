@@ -1,5 +1,6 @@
 // Action Types
 
+export const LOGIN_EMAIL = 'LOGIN_EMAIL';
 export const SAVE_USER_INFO_ASYNC = 'SAVE_USER_INFO_ASYNC';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING';
